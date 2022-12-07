@@ -197,6 +197,9 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
 
+        //model from db...
+        Reliese\Coders\CodersServiceProvider::class
+
     ],
 
     /*
