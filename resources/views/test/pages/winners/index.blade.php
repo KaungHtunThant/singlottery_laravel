@@ -1,20 +1,6 @@
-<?php
-    include 'config/conf_new.php';
-    if(!isset($_SESSION['user_id'])){
-        _goto('Login_template.php');
-    }
-?>
-
-<!DOCTYPE html>
-<html>
-    <head>
-        <?php include "static/head.php" ?>
-        <?php include "static/dataTable_css.php" ?>
-        <title>Results Table</title>
-    </head>
-    <body id="page-top">
-        <?php include "static/header.php" ?>
-
+@extends('test.layouts.master')
+@section('title', 'Lottery Winners')
+@section('content')
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
@@ -48,43 +34,34 @@
                             </tfoot>
                             <tbody>
                                 <?php
-                                    $var = 1;
-                                    $result = winnersSelect();
-                                    if (mysqli_num_rows($result) > 0) {
-                                        while($row = mysqli_fetch_assoc($result)) {
+                                    // $var = 1;
+                                    // $result = winnersSelect();
+                                    // if (mysqli_num_rows($result) > 0) {
+                                    //     while($row = mysqli_fetch_assoc($result)) {
                                 ?>
                                 <tr>
-                                    <td><?php echo $var++ ?></td>
-                                    <td><?php echo $row['result_lottery_no']; ?></td>
-                                    <td><?php echo $row['customer_name']; ?></td>
-                                    <td><?php echo $row['customer_ph_no']; ?></td>
+                                    <td><?php //echo $var++ ?></td>
+                                    <td><?php //echo $row['result_lottery_no']; ?></td>
+                                    <td><?php //echo $row['customer_name']; ?></td>
+                                    <td><?php //echo $row['customer_ph_no']; ?></td>
                                     <td><?php
-                                            echo 'Draw No.: '.$row['batch_id'];
+                                            //echo 'Draw No.: '.$row['batch_id'];
                                         ?>
                                     </td>
                                     <td><?php
-                                            $presult = prizeSelect($row['prize_id']);
-                                            echo mysqli_fetch_assoc($presult)['prize_name'];
+                                            // $presult = prizeSelect($row['prize_id']);
+                                            // echo mysqli_fetch_assoc($presult)['prize_name'];
                                         ?>
                                     </td>
                                 </tr>
                                 <?php
-                                        }
-                                    }
+                                    //     }
+                                    // }
                                 ?>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-
         </div>
-
-        <?php include "static/footer.php" ?>
-
-        <?php include "static/bootstrap_core_jscript.php" ?>
-        <?php include "static/core_plugin_jscript.php" ?>
-        <?php include "static/custom_jscript_all.php" ?>
-        <?php include "static/dataTable_jscript.php" ?>
-    </body>
-</html>
+@endsection

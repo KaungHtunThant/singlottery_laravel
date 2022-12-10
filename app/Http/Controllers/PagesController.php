@@ -12,6 +12,16 @@ use App\Models\Batch;
 
 class PagesController extends Controller
 {
+    public function getlastbatch()
+    {
+        $bidarray = array();
+        $batches = DB::table('batches')->pluck('batch_id');
+        foreach ($batches as $batch) {
+            array_push($bidarray, $batch);
+        }
+        return $bidarray[count($bidarray)-1];
+    }
+
     public function index()
     {
         //Fetch datas
@@ -20,13 +30,8 @@ class PagesController extends Controller
         $batches = Batch::all();
 
         // preparing variables
-        $bidarray = array();
         $bidarray2 = array();
-        $batches = DB::table('batches')->pluck('batch_id');
-        foreach ($batches as $batch) {
-            array_push($bidarray, $batch);
-        }
-        $bid = $bidarray[count($bidarray)-1];
+        $bid = $this->getlastbatch();
 
         $lotteries = DB::table('lotteries')
             ->where('batch_id', $bid)
@@ -54,7 +59,8 @@ class PagesController extends Controller
                 'customer_count' => $customer_count,
                 'tickets_left' => $tickets_left,
                 'tickets_left_percent' => $tickets_left_percent,
-                'tickets_total' => $tickets_total
+                'tickets_total' => $tickets_total,
+                'lastbid' => $this->getlastbatch()
             ]);
     }
 }

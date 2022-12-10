@@ -56,11 +56,11 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Forms</h6>
                             <a class="collapse-item" href="{{ url('/lottery/create') }}">Lottery Form</a>
-                            <a class="collapse-item" href="ResultForm_template.php">Result Form</a>
+                            <a class="collapse-item" href="{{ url('/result/create') }}">Result Form</a>
                             <h6 class="collapse-header">Tables</h6>
                             <a class="collapse-item" href="{{ url('/lottery') }}">Lottery Table</a>
-                            <a class="collapse-item" href="ResultTable_template.php">Results Table</a>
-                            <a class="collapse-item" href="WinnersTable_template.php">Lottery Winners Table</a>
+                            <a class="collapse-item" href="{{ url('/result') }}">Results Table</a>
+                            <a class="collapse-item" href="{{ url('/winners') }}">Lottery Winners Table</a>
                         </div>
                     </div>
                 </li>

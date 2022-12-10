@@ -10,9 +10,19 @@ use App\Models\Payment;
 
 class LotteryController extends Controller
 {
+    public function getlastbatch()
+    {
+        $bidarray = array();
+        $batches = DB::table('batches')->pluck('batch_id');
+        foreach ($batches as $batch) {
+            array_push($bidarray, $batch);
+        }
+        return $bidarray[count($bidarray)-1];
+    }
+
     public function index()
     {
-        $lotteries = Lottery::all();
+        $lotteries = Lottery::orderByDesc('lottery_id')->get();
         $batches = Batch::all();
         $payments = Payment::all();
         return view ('test.pages.lottery.index', 
@@ -27,10 +37,12 @@ class LotteryController extends Controller
     {
         $batches = Batch::all();
         $payments = Payment::all();
+        $newbid = $this->getlastbatch()+1;
         return view ('test.pages.lottery.create', 
             [
                 'batches' => $batches,
                 'payments' => $payments,
+                'newbid' => $newbid
             ]);
     }
 
@@ -41,5 +53,24 @@ class LotteryController extends Controller
         return redirect('/lottery')->with('flash_message', 'Lottery Added!');  
     }
 
+    // public function edit($id)
+    // {
+    //     $student = Students::find($id);
+    //     return view('pages.edit')->with('students', $student);
+    // }
+  
+    // public function update(Request $request, $id)
+    // {
+    //     $student = Lottery::find($id);
+    //     $input = $request->all();
+    //     $student->update($input);
+    //     return redirect('/lottery')->with('flash_message', 'Lottery Updated!');  
+    // }
+  
+    // public function destroy($id)
+    // {
+    //     Students::destroy($id);
+    //     return redirect('/')->with('flash_message', 'Students deleted!');  
+    // }
 
 }

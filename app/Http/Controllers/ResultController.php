@@ -8,15 +8,18 @@ use App\Models\Lottery;
 use App\Models\Batch;
 use App\Models\Payment;
 use App\Models\Result;
+use App\Models\Prize;
 
 class ResultController extends Controller
 {
     public function index()
     {
         $results = Result::all();
+        $prizes = Prize::all();
         return view ('test.pages.result.index', 
             [
-                'results' => $results
+                'results' => $results,
+                'prizes' => $prizes
             ]);
     }
 
@@ -28,7 +31,7 @@ class ResultController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        Lottery::create($input);
-        return redirect('/lottery')->with('flash_message', 'Lottery Added!');  
+        Result::create($input);
+        return redirect('/result')->with('flash_message', 'Result Added!');  
     }
 }

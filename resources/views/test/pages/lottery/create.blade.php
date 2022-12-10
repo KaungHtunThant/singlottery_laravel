@@ -10,9 +10,9 @@
                     <h6 class="m-0 font-weight-bold text-primary">Lottery Form</h6>
                 </div>
                 <div class="card-body">
-                    <form method="post">
+                    <form method="post" action="{{ url('/lottery') }}">
+                        {!! csrf_field() !!}
                         <div class="row">
-                            <input type="hidden" name="user_id" value="{{ Auth::user()->name }}">
                             <!-- <input type="hidden" namm=""> -->
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -72,13 +72,14 @@
                                     <label class="btn btn-sm btn-outline-success" for="option1">Yes</label> | 
                                     <input type="radio" class="btn-check" name="paid" id="option2" autocomplete="off" value="0">
                                     <label class="btn btn-sm btn-outline-danger" for="option2">No</label>
+                                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <hr class="d-md-none divider">
                                     <div class="d-flex justify-content-center">
-                                        <input class="btn btn-primary" type="submit" name="lottery_insert" value="Submit"> 
+                                        <input class="btn btn-primary" type="submit" value="Submit"> 
                                     </div>
                                 </div>
                             </div>
@@ -95,23 +96,21 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">Add Batch 
-                            <?php
-                                // echo lastBatchSelect();
-                            ?>
+                                {{ $newbid }}
                         </h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
-                    <form method="post" action="{{ url('/lotteryform') }}">
+                    <form method="post" action="{{ url('/batch') }}">
                         {!! csrf_field() !!}
                         <div class="modal-body">
-                            <input type="hidden" name="batch_id" value="lastBatchSelect();">
+                            <input type="hidden" name="batch_id" value="{{ $newbid }}">
                             <label for="start_date">Start Date</label>
                             <input type="text" class="form-control" name="start_date" id="start_date" aria-describedby="start_date_Help" placeholder="Enter Start Date">
                             <label for="end_date">End Date</label>
                             <input type="text" class="form-control" name="end_date" id="end_date" aria-describedby="end_date_Help" placeholder="Enter End Date">
                         </div>
                         <div class="modal-footer">
-                            <input type="submit" class="btn btn-success" name="batch_insert">
+                            <input type="submit" class="btn btn-success">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                         </div>
                     </form>

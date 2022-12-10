@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\LotteryController;
 use App\Http\Controllers\ResultController;
+use App\Http\Controllers\WinnerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,4 +43,12 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::resource("/result", ResultController::class);
+});
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::resource("/winners", WinnerController::class);
 });

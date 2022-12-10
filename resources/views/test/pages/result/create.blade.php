@@ -1,47 +1,31 @@
-<?php
-    include 'config/conf_new.php';
-    if(!isset($_SESSION['user_id'])){
-        _goto('Login_template.php');
-    }
-?>
-
-<!DOCTYPE html>
-<html>
-    <head>
-        <?php include "static/head.php" ?>
-        <title>Lottery Form</title>
-    </head>
-    <body id="page-top">
-        <?php include "static/header.php" ?>
-
+@extends('test.layouts.master')
+@section('title', 'Add Result')
+@section('content')
         <div class="container">
-            <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Results Form</h1>
-            </div> -->
             <div class="card shadow h-100 py-2">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Results Form</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Results/ Results Form</h6>
                 </div>
                 <div class="card-body">
                     <form method="post">
                         <div class="row">
-                            <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
+                            <input type="hidden" name="user_id" value="{{ Auth::user()->name }}">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="customer_name">Batch</label>
                                     <select class="form-control" id="batch_id" name="batch_id">
                                         <option selected>--- Choose a batch ---</option>
                                         <?php
-                                            $result = dbSelect(array('*'), 'batches');
-                                            if (mysqli_num_rows($result) > 0) {
-                                                while($row = mysqli_fetch_assoc($result)) {
+                                            // $result = dbSelect(array('*'), 'batches');
+                                            // if (mysqli_num_rows($result) > 0) {
+                                            //     while($row = mysqli_fetch_assoc($result)) {
                                         ?>
-                                            <option value="<?php echo $row['batch_id']; ?>">
-                                                <?php echo $row['batch_id']; ?>
+                                            <option value="<?php //echo $row['batch_id']; ?>">
+                                                <?php //echo $row['batch_id']; ?>
                                             </option>
                                         <?php
-                                                }
-                                            }
+                                            //     }
+                                            // }
                                         ?>
                                     </select>
                                 </div>
@@ -101,10 +85,4 @@
                 </div>
             </div>
         </div>
-
-        <?php include "static/footer.php" ?>
-        <?php include "static/bootstrap_core_jscript.php" ?>
-        <?php include "static/core_plugin_jscript.php" ?>
-        <?php include "static/custom_jscript_all.php" ?>
-    </body>
-</html>
+@endsection

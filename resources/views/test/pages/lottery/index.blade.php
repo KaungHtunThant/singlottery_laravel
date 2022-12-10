@@ -15,7 +15,7 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>No.</th>
                             <th>Batch</th>
                             <th>Lottery Number</th>
                             <th>Customer Name</th>
@@ -26,7 +26,7 @@
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>ID</th>
+                            <th>No.</th>
                             <th>Batch</th>
                             <th>Lottery Number</th>
                             <th>Customer Name</th>
@@ -38,13 +38,25 @@
                     <tbody>
                         @foreach($lotteries as $lottery)
                         <tr>
-                            <td>{{ $lottery->lottery_id }}<?php //echo $row['lottery_id']; ?></td>
-                            <td>{{ $lottery->batch_id }}<?php //echo $row['batch_id']; ?></td>
-                            <td>{{ $lottery->lottery_no }}<?php //echo $row['lottery_no']; ?></td>
-                            <td>{{ $lottery->customer_name }}<?php //echo $row['customer_name']; ?></td>
-                            <td>{{ $lottery->customer_ph_no }}<?php //echo $row['customer_ph_no']; ?></td>
-                            <td>{{ $lottery->payment_id }}</td>
-                            <td>{{ $lottery->paid }}</td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $lottery->batch_id }}</td>
+                            <td>{{ $lottery->lottery_no }}</td>
+                            <td>{{ $lottery->customer_name }}</td>
+                            <td>{{ $lottery->customer_ph_no }}</td>
+                            <td>
+                                @foreach($payments as $payment)
+                                    @if($payment->payment_id == $lottery->payment_id)
+                                        {{ $payment->payment_method }}
+                                    @endif
+                                @endforeach
+                            </td>
+                            <td>
+                                @if($lottery->paid == 1)
+                                    Yes
+                                @else
+                                    No
+                                @endif
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -52,7 +64,5 @@
             </div>
         </div>
     </div>
-
 </div>
-<!-- /.container-fluid -->
 @endsection
