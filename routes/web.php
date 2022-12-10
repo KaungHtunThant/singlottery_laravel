@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\LotteryController;
+use App\Http\Controllers\ResultController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,4 +26,20 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::resource("/dashboard", PagesController::class);
+});
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::resource("/lottery", LotteryController::class);
+});
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::resource("/result", ResultController::class);
 });

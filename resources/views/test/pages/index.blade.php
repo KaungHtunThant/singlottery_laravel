@@ -2,7 +2,6 @@
 @section('title', 'Dashboard')
 @section('content')
         <!-- Begin Page Content -->
-        <?php include 'config/conf_new.php'; ?>
         <div class="container-fluid">
 
             <!-- Page Heading -->
@@ -23,10 +22,7 @@
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                         Earnings (This Month)</div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <?php
-                                        // $var1 = customersSelect();
-                                        // echo '$'.$var1*1700;
-                                    ?>
+                                        {{ $earnings }} MMK
                                     </div>
                                 </div>
                                 <div class="col-auto">
@@ -46,10 +42,7 @@
                                     <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                         Customer Count (This month)</div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <?php
-                                        // $var1 = customersSelect();
-                                        // echo $var1;
-                                    ?>
+                                         {{ $customer_count }}
                                     </div>
                                 </div>
                                 <div class="col-auto">
@@ -66,17 +59,21 @@
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Goal (<?php //echo 50 -customersSelect(); ?> Tickets left)
+                                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Goal (
+                                        {{  $tickets_left }}
+                                     Tickets left)
                                     </div>
                                     <div class="row no-gutters align-items-center">
                                         <div class="col-auto">
-                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?php //echo customersSelect()/50*100; ?>%</div>
+                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                {{ $tickets_left_percent }} %
+                                            </div>
                                         </div>
                                         <div class="col">
                                             <div class="progress progress-sm mr-2">
                                                 <div class="progress-bar bg-info" role="progressbar"
-                                                    style="width: <?php //echo customersSelect()/50*100; ?>%" aria-valuenow="<?php //echo customersSelect(); ?>" aria-valuemin="0"
-                                                    aria-valuemax="50"></div>
+                                                    style="width: {{ $tickets_left_percent }}%" aria-valuenow=" {{ $customer_count }} " aria-valuemin="0"
+                                                    aria-valuemax="{{ $tickets_total }}"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -94,8 +91,7 @@
             <div class="row">
                 <div class="col-xl-4 col-lg-5">
                     <div class="card shadow mb-4">
-                        <div
-                            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                             <h6 class="m-0 font-weight-bold text-primary">Lottery Tickets</h6>
                             <div class="dropdown no-arrow">
                                 <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
@@ -134,7 +130,7 @@
                 <div class="col-xl-8 col-lg-7">
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Results List</h>
+                            <h6 class="m-0 font-weight-bold text-primary">Results List</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-xs-responsive">

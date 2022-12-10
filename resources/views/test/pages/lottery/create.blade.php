@@ -1,23 +1,10 @@
-<?php
-    include 'config/conf_new.php';
-    if(!isset($_SESSION['user_id'])){
-        _goto('Login_template.php');
-    }
-?>
-
-<!DOCTYPE html>
-<html>
-    <head>
-        <?php include "static/head.php" ?>
-        <title>Lottery Form</title>
-    </head>
-    <body id="page-top">
-        <?php include "static/header.php" ?>
-
+@extends('test.layouts.master')
+@section('title', 'Add Lottery')
+@section('content')
         <div class="container">
-            <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 class="h3 mb-0 text-gray-800">Lottery Form</h1>
-            </div> -->
+            </div>
             <div class="card shadow h-100 py-2">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Lottery Form</h6>
@@ -25,7 +12,7 @@
                 <div class="card-body">
                     <form method="post">
                         <div class="row">
-                            <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
+                            <input type="hidden" name="user_id" value="{{ Auth::user()->name }}">
                             <!-- <input type="hidden" namm=""> -->
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -40,18 +27,11 @@
                                         <div class="col-8">
                                             <select class="form-control" id="batch_id" name="batch_id" required>
                                                 <option value="" selected>None</option>
-                                                <?php
-                                                    $result = dbSelect(array('*'), 'batches');
-                                                    if (mysqli_num_rows($result) > 0) {
-                                                        while($row = mysqli_fetch_assoc($result)) {
-                                                ?>
-                                                    <option value="<?php echo $row['batch_id']; ?>">
-                                                        <?php echo $row['batch_id']; ?>
+                                                @foreach($batches as $batch)
+                                                    <option value="{{ $batch->batch_id }}">
+                                                        {{ $batch->batch_id }}
                                                     </option>
-                                                <?php
-                                                        }
-                                                    }
-                                                ?>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="col-4">
@@ -77,18 +57,11 @@
                                     <label for="payment_id">Payment Type</label>
                                     <select class="form-control" id="payment_id" name="payment_id">
                                         <option selected>--- Choose a payment option ---</option>
-                                        <?php
-                                            $result = dbSelect(array('*'), 'payments');
-                                            if (mysqli_num_rows($result) > 0) {
-                                                while($row = mysqli_fetch_assoc($result)) {
-                                        ?>
-                                            <option value="<?php echo $row['payment_id']; ?>">
-                                                <?php echo $row['payment_method']; ?>
-                                            </option>
-                                        <?php
-                                                }
-                                            }
-                                        ?>
+                                        @foreach($payments as $payment)
+                                        <option value="{{ $payment->payment_id }}">
+                                            {{ $payment->payment_method }}
+                                        </option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -123,12 +96,13 @@
                     <div class="modal-header">
                         <h4 class="modal-title">Add Batch 
                             <?php
-                                echo lastBatchSelect();
+                                // echo lastBatchSelect();
                             ?>
                         </h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
-                    <form method="post">
+                    <form method="post" action="{{ url('/lotteryform') }}">
+                        {!! csrf_field() !!}
                         <div class="modal-body">
                             <input type="hidden" name="batch_id" value="lastBatchSelect();">
                             <label for="start_date">Start Date</label>
@@ -144,10 +118,4 @@
                 </div>
             </div>
         </div>
-
-        <?php include "static/footer.php" ?>
-        <?php include "static/bootstrap_core_jscript.php" ?>
-        <?php include "static/core_plugin_jscript.php" ?>
-        <?php include "static/custom_jscript_all.php" ?>
-    </body>
-</html>
+@endsection

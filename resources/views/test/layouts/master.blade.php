@@ -1,10 +1,3 @@
-<?php
-    // include 'config/conf_new.php';
-    // if(!isset($_SESSION['user_id'])){
-    //     _goto('Login_template.php');
-    // }
-?>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,11 +9,11 @@
 
         <!-- Custom fonts for this template-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link href="{{ url('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
         <!-- Custom styles for this template-->
-        <link href="css/sb-admin-2.min.css" rel="stylesheet">
+        <link href="{{ url('css/sb-admin-2.min.css') }}" rel="stylesheet">
 
         <title>Dashboard</title>
     </head>
@@ -44,7 +37,7 @@
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.php">
+                    <a class="nav-link" href="/">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -62,10 +55,10 @@
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Forms</h6>
-                            <a class="collapse-item" href="LotteryForm_template.php">Lottery Form</a>
+                            <a class="collapse-item" href="{{ url('/lottery/create') }}">Lottery Form</a>
                             <a class="collapse-item" href="ResultForm_template.php">Result Form</a>
                             <h6 class="collapse-header">Tables</h6>
-                            <a class="collapse-item" href="LotteryTable_template.php">Lottery Table</a>
+                            <a class="collapse-item" href="{{ url('/lottery') }}">Lottery Table</a>
                             <a class="collapse-item" href="ResultTable_template.php">Results Table</a>
                             <a class="collapse-item" href="WinnersTable_template.php">Lottery Winners Table</a>
                         </div>
@@ -100,7 +93,7 @@
                         data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Settings</h6>
-                            <a class="collapse-item" href="Login_template.php">Logout</a>
+                            <a class="collapse-item" href="{{ route('logout') }}">Logout</a>
                         </div>
                     </div>
                 </li>
@@ -179,7 +172,7 @@
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="mr-4 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
                                     <img class="img-profile rounded-circle"
-                                        src="img/undraw_profile.svg">
+                                        src="{{ url('img/undraw_profile.svg') }}">
                                 </a>
                             </li>
 
@@ -210,17 +203,17 @@
         <!-- End of Page Wrapper -->
 
         <!-- Bootstrap core JavaScript-->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="{{ url('vendor/jquery/jquery.min.js') }}"></script>
+        <script src="{{ url('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
         <!-- Core plugin JavaScript-->
-        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="{{ url('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
         <!-- Custom scripts for all pages-->
-        <script src="js/sb-admin-2.min.js"></script>
+        <script src="{{ url('js/sb-admin-2.min.js') }}"></script>
 
         <!-- Pie chart script -->
-        <script src="vendor/chart.js/Chart.min.js"></script>
+        <script src="{{ url('vendor/chart.js/Chart.min.js') }}"></script>
         <script>
         // Set new default font family and font color to mimic Bootstrap's default styling
         Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
@@ -260,11 +253,11 @@
         </script>
 
         <!-- Page level plugins -->
-        <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-        <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+        <script src="{{ url('vendor/datatables/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ url('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
         <!-- Page level custom scripts -->
-        <script src="js/demo/datatables-demo.js"></script>
+        <script src="{{ url('js/demo/datatables-demo.js') }}"></script>
 
     </body>
 </html>
